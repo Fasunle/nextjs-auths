@@ -5,7 +5,13 @@ const nextConfig = {
        // this register all external servers for images
          {
             hostname: 'lh3.googleusercontent.com',
-         }
+         },
+         {
+            hostname: 's.gravatar.com',
+         },
+         {
+            hostname: 'lh3.googleusercontent.com',
+         },
        ]
     }
 };

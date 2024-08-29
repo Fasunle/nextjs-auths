@@ -1,19 +1,15 @@
-import { withAuth } from "next-auth/middleware";
+import { auth } from "@/lib/auth"
+ 
+export default auth((req) => {
+console.log("🚀 ~ auth ~ req.url:", req.url)
 
-export default withAuth({
-  pages: {
-    signIn: "/",
-    signOut: "/",
-    error: "/",
-  },
-  callbacks: {
-    authorized: ({ token, req }) => {
-      const name = req.cookies.get("name") || "";
-      return !!token || name.toString() === "appSession";
-    },    
-  },
-});
+  // send back to the login page if not logged in
+  // if(!req.auth?.user) {
+  //   return NextResponse.redirect(new URL("/login", req.url))
+  // }
+  // req.auth
+})
 
-export const config = {
-  matcher: ["/admin"],
-};
+export const config ={
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)", "/"]
+}

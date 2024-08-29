@@ -1,19 +1,18 @@
 "use client";
 
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { signIn, useSession } from "next-auth/react";
 
 const LoginButton = ({ style = {} }) => {
-  const session = useUser();
-  if(session?.user) return null;
+  const session = useSession();
+  console.log("🚀 ~ LoginButton ~ session:", session)
+  const user = session?.data?.user || null;
+  if (user) return null;
 
   return (
-    <a
-      href="/api/auth/login"
-      style={{...style, float: "right"}}
-    >
+    <button onClick={() => signIn()} style={{ ...style, float: "right" }}>
       Login
-    </a>
+    </button>
   );
-}
+};
 
 export default LoginButton;
